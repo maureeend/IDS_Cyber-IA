@@ -1,2 +1,2 @@
 # Threat_Intelligence_Cyber-IA
-Projet de Threat Intelligence en Python basé sur du Machine learning
+Projet de Cyber&IA : IDS en Python basé sur du Machine learning
