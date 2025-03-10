@@ -16,9 +16,7 @@ L'objectif principal est d'analyser le trafic réseau, d’identifier des compor
 Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suivants :  
 ✔ Python (>=3.8)  
 ✔ Git
-
 ✔ Un environnement virtuel Python (recommandé)
-
 ✔ Bibliothèques nécessaires (voir `requirements.txt`)
 
 ## Installation
@@ -37,39 +35,16 @@ Commande : python src/preprocess.py
 
 
 ## Architecture du projet
-📂 AI_IDS/
-│── 📂 data/               # Données capturées et prétraitées
-│   ├── raw_data.csv       # Données brutes capturées
-│   ├── processed_data.csv # Données nettoyées pour l'IA
-│
-│── 📂 models/             # Dossier contenant le modèle IA
-│   ├── trained_model.pkl  # Modèle entraîné
-│   ├── train_model.py     # Script d'entraînement du modèle
-│
-│── 📂 src/                # Code source principal
-│   ├── capture.py         # Capture du trafic réseau
-│   ├── preprocess.py      # Prétraitement des données
-│   ├── detect.py          # Détection d'intrusions (IA)
-│   ├── visualize.py       # Interface de visualisation (optionnel)
-│
-│── 📂 tests/              # Tests unitaires
-│   ├── test_capture.py    # Vérification de la capture
-│   ├── test_preprocess.py # Vérification du prétraitement
-│   ├── test_model.py      # Vérification de la détection
-│
-│── 📂 logs/               # Fichiers de logs des intrusions détectées
-│── app.py                 # Lancement de l'application
-│── requirements.txt        # Liste des bibliothèques requises
-│── README.md               # Documentation du projet
-│── .gitignore              # Exclusion des fichiers inutiles pour Git
 
 
 ## Lien
 Une vidéo explicative du projet est disponible ici :
+
 Vidéo youtube : 
 
 ## Auteurs et collaboration
 Reizène – Capture du trafic et prétraitement des données
+
 Maureen – Développement du modèle IA et visualisation
 
 **Projet réalisé dans le cadre d’un cours académique en cybersécurité et intelligence artificielle.**
