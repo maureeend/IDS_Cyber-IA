@@ -1,74 +1,57 @@
-""" Capture un paquet réseau et le classe avec le modèle dans trained_model.pkl """
-
-""" Capture un paquet réseau et le classe avec le modèle dans trained_model.pkl """
-
 import joblib
 import pandas as pd
-import scapy.all as scapy
+import os
+import logging
 
-# Charger le modèle
-model = joblib.load("models/trained_model.pkl")
+# Définition des chemins
+model_path = "models/trained_model.pkl"
+data_path = "data/processed_data.csv"
+log_path = "logs/detection.log"
 
-# Définir les features utilisées dans l'entraînement
-columns_to_keep = [
-    "Destination Port", "Flow Duration", "Total Fwd Packets", "Total Backward Packets",
-    "Total Length of Fwd Packets", "Total Length of Bwd Packets",
-    "Fwd Packet Length Mean", "Bwd Packet Length Mean",
-    "Flow IAT Mean", "Fwd IAT Mean", "Bwd IAT Mean",
-    "Fwd Packets/s", "Bwd Packets/s",
-    "SYN Flag Count", "ACK Flag Count", "PSH Flag Count", "FINFlag Count",
-    "Packet Length Mean", "Min Packet Length", "Max Packet Length",
-    "Flow Bytes/s", "Flow Packets/s", "Down/Up Ratio"
-]
+# Configuration du logging
+logging.basicConfig(filename=log_path, level=logging.INFO, format="%(asctime)s - %(message)s")
 
-def extract_features(packet):
-    """ Extrait les features d'un paquet réseau pour la détection d'intrusion """
+# Vérification des fichiers
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Modèle non trouvé : {model_path}. Entraînez-le avant d'exécuter detect.py.")
 
-    try:
-        features = {
-            "Destination Port": packet.dport if packet.haslayer(scapy.TCP) or packet.haslayer(scapy.UDP) else 0,
-            "Flow Duration": packet.time,
-            "Total Fwd Packets": 1 if packet.haslayer(scapy.IP) else 0,
-            "Total Backward Packets": 1 if packet.haslayer(scapy.TCP) else 0,
-            "Total Length of Fwd Packets": len(packet),
-            "Total Length of Bwd Packets": len(packet),
-            "Fwd Packet Length Mean": len(packet),
-            "Bwd Packet Length Mean": len(packet),
-            "Flow IAT Mean": packet.time if packet.time else 0,
-            "Fwd IAT Mean": packet.time if packet.time else 0,
-            "Bwd IAT Mean": packet.time if packet.time else 0,
-            "Fwd Packets/s": 1 / (packet.time if packet.time > 0 else 1),
-            "Bwd Packets/s": 1 / (packet.time if packet.time > 0 else 1),
-            "SYN Flag Count": 1 if packet.haslayer(scapy.TCP) and packet[scapy.TCP].flags & 0x02 else 0,
-            "ACK Flag Count": 1 if packet.haslayer(scapy.TCP) and packet[scapy.TCP].flags & 0x10 else 0,
-            "PSH Flag Count": 1 if packet.haslayer(scapy.TCP) and packet[scapy.TCP].flags & 0x08 else 0,
-            "FINFlag Count": 1 if packet.haslayer(scapy.TCP) and packet[scapy.TCP].flags & 0x01 else 0,
-            "Packet Length Mean": len(packet),
-            "Min Packet Length": len(packet),
-            "Max Packet Length": len(packet),
-            "Flow Bytes/s": len(packet) / (packet.time if packet.time > 0 else 1),
-            "Flow Packets/s": 1 / (packet.time if packet.time > 0 else 1),
-            "Down/Up Ratio": 1
-        }
+if not os.path.exists(data_path):
+    raise FileNotFoundError(f"Données prétraitées introuvables : {data_path}. Exécutez preprocess.py.")
 
-        return pd.DataFrame([features])
-    
-    except Exception as e:
-        print(f"Erreur lors de l'extraction des features : {e}")
-        return None
+# Charger le modèle entraîné
+model = joblib.load(model_path)
+print(f"Modèle chargé depuis : {model_path}")
 
-def packet_callback(packet):
-    """ Analyse un paquet réseau et détecte une intrusion """
 
-    df_packet = extract_features(packet)
+# Charger les données prétraitées
+df = pd.read_csv(data_path)
 
-    if df_packet is not None:
-        # Colonne même que celle de la dataset ?
-        df_packet = df_packet.reindex(columns=columns_to_keep, fill_value=0)
+if df.empty:
+    raise ValueError("Le fichier de données prétraitées est vide.")
 
-        # Prédire intrusion
-        proba = model.predict_proba(df_packet)[:, 1][0] 
-        threshold = 0.5
+# Supprimer la colonne Label si elle est présente
+if "Label" in df.columns:
+    df.drop(columns=["Label"], inplace=True)
 
-        if proba >= threshold:
-            print(f"ALERTE : Intrusion avec Score: {proba:.2f}) - {packet.summary()}")
+# Prédire les intrusions
+predictions = model.predict(df)
+df["Prediction"] = predictions
+
+# Enregistrer les résultats
+df.to_csv("logs/detection_results.csv", index=False)
+print(" Résultats enregistrés dans logs/detection_results.csv")
+
+# Affichage des statistiques
+num_attacks = df["Prediction"].sum()
+num_normal = len(df) - num_attacks
+
+print(f"Résumé de la détection :")
+print(f"   - Trafic normal : {num_normal}")
+print(f"   - Intrusions détectées : {num_attacks}")
+
+# Logger les intrusions détectées
+if num_attacks > 0:
+    logging.info(f"{num_attacks} intrusion(s) détectée(s) ! Vérifiez logs/detection_results.csv.")
+    print("\n [ALERTE] Des intrusions ont été détectées ! ")
+
+print("\nDétection terminée.")
