@@ -18,6 +18,7 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 ✔ Git
 ✔ Un environnement virtuel Python (recommandé)
 ✔ Bibliothèques nécessaires (voir `requirements.txt`)
+✔ Modèle à télécharger sur HuggingFace (voir lien plus bas)
 
 ## Installation
 
@@ -38,9 +39,9 @@ Commande : python src/preprocess.py
 
 
 ## Lien
+Modèle Sur HuggingFace: https://huggingface.co/Maureeendr/CyberIA-model-IDS/tree/main
 Une vidéo explicative du projet est disponible ici :
 
-Vidéo youtube : 
 
 ## Auteurs et collaboration
 Reizène – Capture du trafic et prétraitement des données
