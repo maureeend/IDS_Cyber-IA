@@ -30,11 +30,13 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 1️. Capture du trafic réseau
 Le script capture.py permet d'enregistrer les paquets réseau dans un fichier exploitable.
 Commande : python src/capture.py
+
 📍 Résultat attendu : Création du fichier data/raw_data.csv contenant les paquets capturés.
 
 2️. Prétraitement des données
 Le script preprocess.py nettoie et normalise les données pour les rendre exploitables par l’IA.
 Commande : python src/preprocess.py
+
 📍 Résultat attendu : Génération de data/processed_data.csv contenant les données transformées.
 
 
@@ -44,6 +46,7 @@ Commande : python src/preprocess.py
 
 ## Lien
 Modèle Sur HuggingFace: https://huggingface.co/Maureeendr/CyberIA-model-IDS/tree/main
+
 Une vidéo explicative du projet est disponible ici :
 
 
