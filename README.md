@@ -15,9 +15,13 @@ L'objectif principal est d'analyser le trafic réseau, d’identifier des compor
 ## Prérequis
 Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suivants :  
 ✔ Python (>=3.8)  
+
 ✔ Git
+
 ✔ Un environnement virtuel Python (recommandé)
+
 ✔ Bibliothèques nécessaires (voir `requirements.txt`)
+
 ✔ Modèle à télécharger sur HuggingFace (voir lien plus bas)
 
 ## Installation
