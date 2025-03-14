@@ -47,7 +47,7 @@ columns_to_keep = [
     "Fwd Packet Length Mean", "Bwd Packet Length Mean",
     "Flow IAT Mean", "Fwd IAT Mean", "Bwd IAT Mean",
     "Fwd Packets/s", "Bwd Packets/s",
-    "SYN Flag Count", "ACK Flag Count", "PSH Flag Count", "FINFlag Count",
+    "SYN Flag Count", "ACK Flag Count", "PSH Flag Count", "FIN Flag Count",
     "Packet Length Mean", "Min Packet Length", "Max Packet Length",
     "Flow Bytes/s", "Flow Packets/s", "Down/Up Ratio",
     "Label"
