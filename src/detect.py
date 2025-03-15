@@ -1,57 +1,38 @@
-import joblib
 import pandas as pd
+import joblib
 import os
-import logging
 
 # Définition des chemins
-model_path = "models/trained_model.pkl"
-data_path = "data/processed_data.csv"
-log_path = "logs/detection.log"
+data_dir = os.path.join(os.path.dirname(__file__), "../data")
+processed_data_path = os.path.join(data_dir, "processed_data.csv")
+model_path = os.path.join(os.path.dirname(__file__), "../models/trained_model.pkl")
 
-# Configuration du logging
-logging.basicConfig(filename=log_path, level=logging.INFO, format="%(asctime)s - %(message)s")
-
-# Vérification des fichiers
+# Chargement du modèle
 if not os.path.exists(model_path):
-    raise FileNotFoundError(f"Modèle non trouvé : {model_path}. Entraînez-le avant d'exécuter detect.py.")
+    raise FileNotFoundError(f"Le modèle '{model_path}' est introuvable. Lancez 'train_model.py' d'abord.")
 
-if not os.path.exists(data_path):
-    raise FileNotFoundError(f"Données prétraitées introuvables : {data_path}. Exécutez preprocess.py.")
-
-# Charger le modèle entraîné
 model = joblib.load(model_path)
-print(f"Modèle chargé depuis : {model_path}")
+print(f"\nModèle chargé depuis : {model_path}")
 
+# Chargement des données
+if not os.path.exists(processed_data_path):
+    raise FileNotFoundError(f"Le fichier '{processed_data_path}' est introuvable. Lancez 'preprocess.py' d'abord.")
 
-# Charger les données prétraitées
-df = pd.read_csv(data_path)
+df = pd.read_csv(processed_data_path)
 
-if df.empty:
-    raise ValueError("Le fichier de données prétraitées est vide.")
-
-# Supprimer la colonne Label si elle est présente
-if "Label" in df.columns:
-    df.drop(columns=["Label"], inplace=True)
-
-# Prédire les intrusions
+# Prédiction sur les données
 predictions = model.predict(df)
+
+# Résumé des résultats
 df["Prediction"] = predictions
+intrusions = (df["Prediction"] == 1).sum()
+normaux = (df["Prediction"] == 0).sum()
 
-# Enregistrer les résultats
-df.to_csv("logs/detection_results.csv", index=False)
-print(" Résultats enregistrés dans logs/detection_results.csv")
+print("\nRésumé de la détection :")
+print(f"   - Trafic normal : {normaux}")
+print(f"   - Intrusions détectées : {intrusions}")
 
-# Affichage des statistiques
-num_attacks = df["Prediction"].sum()
-num_normal = len(df) - num_attacks
-
-print(f"Résumé de la détection :")
-print(f"   - Trafic normal : {num_normal}")
-print(f"   - Intrusions détectées : {num_attacks}")
-
-# Logger les intrusions détectées
-if num_attacks > 0:
-    logging.info(f"{num_attacks} intrusion(s) détectée(s) ! Vérifiez logs/detection_results.csv.")
-    print("\n [ALERTE] Des intrusions ont été détectées ! ")
-
-print("\nDétection terminée.")
+# Sauvegarde des résultats
+results_path = os.path.join(os.path.dirname(__file__), "../logs/detection_results.csv")
+df.to_csv(results_path, index=False)
+print(f"\nRésultats enregistrés dans : {results_path}")
