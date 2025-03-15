@@ -65,14 +65,14 @@ Une alerte en temps réel si un malware est détecté dans le trafic.
 
 
 ## Architecture du projet
-📦 src/
-┣ 📜 capture.py – Capture du trafic réseau
-┣ 📜 preprocess.py – Prétraitement des données
-┣ 📜 detect.py – Détection des malwares
-┣ 📂 models/ – Contient le modèle IA
-┣ 📂 data/ – Stocke les fichiers de données
-┣ 📜 requirements.txt – Dépendances du projet
-┗ 📜 README.md – Documentation
+- 📦 src/
+- ┣ 📜 capture.py – Capture du trafic réseau
+- ┣ 📜 preprocess.py – Prétraitement des données
+- ┣ 📜 detect.py – Détection des malwares
+- ┣ 📂 models/ – Contient le modèle IA
+- ┣ 📂 data/ – Stocke les fichiers de données
+- ┣ 📜 requirements.txt – Dépendances du projet
+- ┗ 📜 README.md – Documentation
 
 ## Lien
 Modèle Sur HuggingFace: https://huggingface.co/Maureeendr/CyberIA-model-IDS/tree/main
