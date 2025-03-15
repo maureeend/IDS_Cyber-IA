@@ -27,11 +27,13 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 ## Installation
 Clonez ce repository :
 git clone https://github.com/ton-repo.git
+
 cd ton-repo
 
 Créez un environnement virtuel et activez-le :
 python -m venv venv
 source venv/bin/activate  # Sur Linux/Mac
+
 venv\Scripts\activate  # Sur Windows
 
 Installez les dépendances :
