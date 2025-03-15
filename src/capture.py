@@ -8,7 +8,7 @@ INTERFACE = conf.iface
 print(f"Interface détectée : {INTERFACE}")
 
 # Création du dossier data s'il n'existe pas
-data_dir = os.path.join(os.path.dirname(_file_), "../data")
+data_dir = os.path.join(os.path.dirname(__file__), "../data")
 os.makedirs(data_dir, exist_ok=True)
 
 # Liste des flux capturés
