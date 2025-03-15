@@ -25,21 +25,21 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 ✔ Modèle à télécharger sur HuggingFace (voir lien plus bas)
 
 ## Installation
-Clonez ce repository :
-git clone https://github.com/ton-repo.git
+**Clonez ce repository :**
+- git clone https://github.com/ton-repo.git
 
-cd ton-repo
+- cd ton-repo
 
-Créez un environnement virtuel et activez-le :
-python -m venv venv
-source venv/bin/activate  # Sur Linux/Mac
+**Créez un environnement virtuel et activez-le :**
+- python -m venv venv
+- source venv/bin/activate  # Sur Linux/Mac
 
-venv\Scripts\activate  # Sur Windows
+- venv\Scripts\activate  # Sur Windows
 
-Installez les dépendances :
+**Installez les dépendances :**
 pip install -r requirements.txt
 
-Téléchargez le modèle depuis HuggingFace :
+**Téléchargez le modèle depuis HuggingFace :**
 wget https://huggingface.co/Maureeendr/CyberIA-model-IDS/resolve/main/model.pth 
 
 ## Utilisation
