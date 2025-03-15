@@ -25,6 +25,20 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 ✔ Modèle à télécharger sur HuggingFace (voir lien plus bas)
 
 ## Installation
+Clonez ce repository :
+git clone https://github.com/ton-repo.git
+cd ton-repo
+
+Créez un environnement virtuel et activez-le :
+python -m venv venv
+source venv/bin/activate  # Sur Linux/Mac
+venv\Scripts\activate  # Sur Windows
+
+Installez les dépendances :
+pip install -r requirements.txt
+
+Téléchargez le modèle depuis HuggingFace :
+wget https://huggingface.co/Maureeendr/CyberIA-model-IDS/resolve/main/model.pth 
 
 ## Utilisation
 1️. Capture du trafic réseau
@@ -39,10 +53,24 @@ Commande : python src/preprocess.py
 
 📍 Résultat attendu : Génération de data/processed_data.csv contenant les données transformées.
 
+3️. Détection des malwares
+Le modèle est maintenant fonctionnel ! 🎉
+Le script detect.py permet d’analyser les flux et de détecter la présence de malwares.
+Commande : python src/detect.py
+
+📍 Résultat attendu :
+Une alerte en temps réel si un malware est détecté dans le trafic.
 
 
 ## Architecture du projet
-
+📦 src/
+┣ 📜 capture.py – Capture du trafic réseau
+┣ 📜 preprocess.py – Prétraitement des données
+┣ 📜 detect.py – Détection des malwares
+┣ 📂 models/ – Contient le modèle IA
+┣ 📂 data/ – Stocke les fichiers de données
+┣ 📜 requirements.txt – Dépendances du projet
+┗ 📜 README.md – Documentation
 
 ## Lien
 Modèle Sur HuggingFace: https://huggingface.co/Maureeendr/CyberIA-model-IDS/tree/main
