@@ -35,4 +35,6 @@ print(f"   - Intrusions détectées : {intrusions}")
 # Sauvegarde des résultats
 results_path = os.path.join(os.path.dirname(__file__), "../logs/detection_results.csv")
 df.to_csv(results_path, index=False)
+df.to_csv(processed_data_path, index=False)  # Sauvegarde des prédictions dans processed_data.csv
+print(f"\nPrédictions ajoutées et sauvegardées dans : {processed_data_path}")
 print(f"\nRésultats enregistrés dans : {results_path}")
