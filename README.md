@@ -74,7 +74,7 @@ Une alerte en temps réel si un malware est détecté dans le trafic.
 - ┣ 📜 requirements.txt – Dépendances du projet
 - ┗ 📜 README.md – Documentation
 
-## Lien
+## Liens
 Modèle Sur HuggingFace: https://huggingface.co/Maureeendr/CyberIA-model-IDS/tree/main
 
 Une vidéo explicative du projet est disponible ici :
