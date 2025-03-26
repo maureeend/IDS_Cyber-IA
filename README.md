@@ -47,7 +47,7 @@ Commande : python src/preprocess.py
 ## Lien
 Modèle Sur HuggingFace: https://huggingface.co/Maureeendr/CyberIA-model-IDS/tree/main
 
-Une vidéo explicative du projet est disponible ici :
+Une vidéo explicative du projet est disponible ici : https://youtu.be/hH2h3r6dQXk
 
 
 ## Auteurs et collaboration
