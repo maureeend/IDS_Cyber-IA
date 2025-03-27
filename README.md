@@ -26,8 +26,10 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 
 ## Installation
 
-1. Télécharger le projet
-2. Lancer app.py
+1. Regarder la vidéo youtube (lien ci dessous)
+2. Télécharger le projet
+3. Télécharger le modèle entrainé sur HuggingFace (lien ci dessous)
+4. Lancer app.py
 
 ## Utilisation
 1️. Capture du trafic réseau
