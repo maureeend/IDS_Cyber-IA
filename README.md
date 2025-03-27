@@ -26,6 +26,9 @@ Avant d’exécuter ce projet, assurez-vous d’avoir installé les outils suiva
 
 ## Installation
 
+1. Télécharger le projet
+2. Lancer app.py
+
 ## Utilisation
 1️. Capture du trafic réseau
 Le script capture.py permet d'enregistrer les paquets réseau dans un fichier exploitable.
@@ -38,10 +41,6 @@ Le script preprocess.py nettoie et normalise les données pour les rendre exploi
 Commande : python src/preprocess.py
 
 📍 Résultat attendu : Génération de data/processed_data.csv contenant les données transformées.
-
-
-
-## Architecture du projet
 
 
 ## Lien
